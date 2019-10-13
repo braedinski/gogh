@@ -8,10 +8,12 @@
  * 
 */
 
-#include <gogh/gogh.hpp>
 
 #include <iostream>
 #include <getopt.h>
+#include <gogh/gogh.hpp>
+#include <gogh/arch/mips/decoder.hpp>
+
 
 int main(int argc, char * const *argv)
 {
@@ -45,8 +47,26 @@ int main(int argc, char * const *argv)
         }
     }
 
-    gogh::arch::mips::context context;
-    context.print_registers();
-    
+    gogh::arch::mips::decoder decoder;
+    gogh::stab stab;
+    gogh::context context(decoder, stab);
+
+    // gogh::context *context = gogh::factory::get_mips_context();
+
+    // Below is the beginnings of some really shitty taint-analysis.
+
+    std::vector<std::uint32_t> instructions = {
+        0x00a62020,
+        0x00843020,
+        0x00a43820,
+        0x01084020,
+        0x00884020
+    };
+
+    for (const auto &instruction : instructions) {
+        auto decoded = context.decode(instruction);
+        decoded->print();
+    }
+
     return EXIT_SUCCESS;
 }

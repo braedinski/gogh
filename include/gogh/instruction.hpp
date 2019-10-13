@@ -12,10 +12,9 @@ namespace gogh {
     class instruction {
         public:
             instruction() = default;
-
             virtual ~instruction() = default;
 
+        public:
             virtual void print() = 0;
-            virtual void print_instruction() = 0;
     };
 }

@@ -9,7 +9,8 @@
 
 #include <map>
 #include <memory>
-#include "tagmap.hpp"
+#include <gogh/tagmap.hpp>
+
 
 namespace gogh {
     // Each entry in the segment translation table can store taint on 1024 bytes of actual memory.

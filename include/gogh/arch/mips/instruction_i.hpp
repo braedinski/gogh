@@ -2,7 +2,11 @@
  * gogh::instruction_i
 */
 
+#pragma once
+
 #include <map>
+#include <iomanip>
+#include <iostream>
 #include "../../instruction.hpp"
 
 namespace gogh::arch::mips {
@@ -13,35 +17,42 @@ namespace gogh::arch::mips {
                 std::uint32_t rs,
                 std::uint32_t rt,
                 std::uint32_t immediate) :
-                    _opcode(opcode),
-                    _rs(rs),
-                    _rt(rt),
-                    _immediate(immediate) {
-
-                
+                _opcode(opcode),
+                _rs(rs),
+                _rt(rt),
+                _immediate(immediate) {
+                    
             }
 
             void print() override {
-                /*
                 std::cout
                         << "opcode = 0" << ", "
                         << "rs = " << _rs << ", "
                         << "rt = " << _rt << ", "
                         << "immediate = " << _immediate << '\n';
-                */
             }
 
+            /*
             void print_instruction() override {
                 auto itr = mnemonics.find(_opcode);
                 if (itr != mnemonics.end()) {
-                    /*
-                    std::cout << itr->second << ' '
-                        << '$' << _rt << ", "
-                        << '$' << _rs << ", "
+                    std::cout << itr->second << '\t'
+                        << '$' << std::dec << std::setw(2) << _rt << ", "
+                        << '$' << std::dec << std::setw(2) << _rs << ", "
                         << std::hex << "0x" << _immediate << '\n';
-                    */
+                } else {
+                    print();
                 }
             }
+
+            std::uint32_t get_source() override {
+                return _rs;
+            }
+
+            std::uint32_t get_destination() override {
+                return _rt;
+            }
+            */
 
         private:
             std::uint32_t _opcode,

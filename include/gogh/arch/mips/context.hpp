@@ -3,31 +3,27 @@
  * 
  * A `context` represents the state of the process.
  * It holds the CPU register file, (i.e. array of `gogh::cpu_register`),
- * it also contains the process's tainted memory tables (`gogh::memory`).
+ * it also contains the process's tainted memory tables (`gogh::stab`).
  * 
 */
 
-#include "cpu_register.hpp"
-#include "../../context.hpp"
+#pragma once
+
+#include <gogh/context.hpp>
+#include <gogh/arch/mips/cpu_register.hpp>
 
 namespace gogh::arch::mips {
-    using namespace gogh::arch;
+
+    using namespace gogh::arch::mips;
 
     class context : public gogh::context {
         public:
-            context() {
-            }
+            context() = default;
 
-            void print_registers() {
-                for (const auto &cpu_register : _cpu_registers) {
-                    std::cout << cpu_register.get_name() << " 0x" << std::hex << cpu_register.get_value() << '\n';
-                }
-            }
+        public:
 
         private:
-            gogh::memory _memory;
-
-            std::array<mips::cpu_register, 31> _cpu_registers {{
+            std::array<cpu_register, 31> _cpu_registers {{
                 "zero",
                 "v0", "v1",
                 "a0", "a1", "a2", "a3",

@@ -3,6 +3,9 @@
  * 
 */
 
+#pragma once
+
+#include <iostream>
 #include "../../instruction.hpp"
 
 namespace gogh::arch::mips {
@@ -18,15 +21,16 @@ namespace gogh::arch::mips {
             }
 
             void print() override {
-                /*
                 std::cout
                         << "opcode = " << _opcode << ", "
                         << "immediate = 0x" << std::hex << _immediate << '\n';
-                */
             }
 
+            /*
             void print_instruction() override {
+                print();
             }
+            */
 
         private:
             std::uint32_t _opcode,
